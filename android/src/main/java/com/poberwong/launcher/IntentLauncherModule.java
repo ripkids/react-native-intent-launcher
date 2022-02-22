@@ -108,7 +108,7 @@ public class IntentLauncherModule extends ReactContextBaseJavaModule implements 
             if (params.getMap(TAG_EXTRA) !== null) {
                 launchIntent.putExtras(Arguments.toBundle(params.getMap(TAG_EXTRA)))
             }
-            
+
             if (launchIntent != null) {
                 getReactApplicationContext().startActivity(launchIntent);
                 promise.resolve(true);

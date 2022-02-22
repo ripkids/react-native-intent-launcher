@@ -29,7 +29,12 @@ IntentLauncher.isAppInstalled('wtf.swell')
   .catch((error) => console.warn('isAppInstalled: no', error));
 
 // open another app by package name
-IntentLauncher.startAppByPackageName('wtf.swell')
+IntentLauncher.startAppByPackageName({
+    packageName: 'your.package.name.here',
+    extra: {
+        someExtra: 'your additional extras here'
+    }
+})
   .then((result) => {
     console.log('startAppByPackageName started');
   })
