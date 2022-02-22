@@ -101,9 +101,14 @@ public class IntentLauncherModule extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void startAppByPackageName(String packageName, final Promise promise) {
-        if (packageName != null) {
-            Intent launchIntent = this.reactContext.getPackageManager().getLaunchIntentForPackage(packageName);
+    public void startAppByPackageName(ReadableMap params, final Promise promise) {
+        if (params.getString(ATTR_PACKAGE_NAME) != null) {
+            Intent launchIntent = this.reactContext.getPackageManager().getLaunchIntentForPackage(params.getString(ATTR_PACKAGE_NAME));
+
+            if (params.getMap(TAG_EXTRA) !== null) {
+                launchIntent.putExtras(Arguments.toBundle(params.getMap(TAG_EXTRA)))
+            }
+            
             if (launchIntent != null) {
                 getReactApplicationContext().startActivity(launchIntent);
                 promise.resolve(true);
